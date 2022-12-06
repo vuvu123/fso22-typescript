@@ -13,6 +13,26 @@ interface RatingResult {
   description: string;
 }
 
+const parseHourArgs = (args: Array<string>): Array<number> => {
+  if (args.length < 3) throw new Error('Not enough arguments');
+
+  let isNumbers = true;
+  for (let i = 2; i < args.length; i++) {
+    if (isNaN(Number(args[i]))) {
+      isNumbers = false;
+    }
+  }
+
+  if (isNumbers) {
+    const hourValues = []
+    for (let i = 2; i < args.length; i++) {
+      hourValues.push(Number(args[i]));
+    }
+    return hourValues;
+  }
+  throw new Error('Provided arguments were not numbers!');
+}
+
 const isSuccessfulWeek = (totalHours: number): boolean => {
   if (totalHours >= 5) return true;
   return false;
@@ -42,7 +62,7 @@ const calculateExercises = (dailyExerciseHours: Array<number>): ExerciseResult =
   const totalExercises = dailyExerciseHours.length;
   const trainingDays = dailyExerciseHours.filter(hour => hour > 0);
 
-  console.log('daily exercise hours', dailyExerciseHours, 'total hours', totalHours, 'total exercises', totalExercises, 'training days', trainingDays);
+  // console.log('daily exercise hours', dailyExerciseHours, 'total hours', totalHours, 'total exercises', totalExercises, 'training days', trainingDays);
 
   const rating = calculateRating(totalHours); 
 
@@ -57,4 +77,13 @@ const calculateExercises = (dailyExerciseHours: Array<number>): ExerciseResult =
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1]));
+try {
+  const exerciseHours = parseHourArgs(process.argv);
+  console.log(calculateExercises(exerciseHours))
+} catch (error: unknown) {
+  let errorMessage = 'Something went wrong.'
+  if (error instanceof Error) {
+    errorMessage += ` Error: ${error.message}.`
+  }
+  console.log(errorMessage)
+}
