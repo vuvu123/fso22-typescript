@@ -43,6 +43,8 @@ const calculateBmi = (height: number, weight: number): Result => {
   }
 }
 
+export default calculateBmi;
+
 try {
   const { value1, value2 } = parseArguments(process.argv);
   console.log(calculateBmi(value1, value2))
