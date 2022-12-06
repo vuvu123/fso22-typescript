@@ -1,10 +1,11 @@
-// Calculate BMI based on given height(cm) and weight (kg) => return message that suits result (i.e. Normal (healthy weight))
+// Calculate BMI based on given height (cm) and weight (kg) => return message that suits result (i.e. Normal (healthy weight))
 type Result = string;
 
 const calculateBmi = (height: number, weight: number): Result => {
   const bmi = weight / (height / 100) ** 2;
   console.log('height (cm)', height, 'weight (kg)', weight);
   console.log('bmi', bmi);
+
   if (bmi < 16) {
     return 'Underweight (Severe thinness)';
   } else if (bmi <= 16.9) {
