@@ -8,12 +8,17 @@ interface ExerciseResult {
   average: number;
 }
 
+interface RatingResult {
+  rating: number;
+  description: string;
+}
+
 const isSuccessfulWeek = (totalHours: number): boolean => {
   if (totalHours >= 5) return true;
   return false;
 };
 
-const calculateRating = (totalHours: number): { rating: number, description: string } => {
+const calculateRating = (totalHours: number): RatingResult => {
   if (totalHours < 5) {
     return {
       rating: 1,
