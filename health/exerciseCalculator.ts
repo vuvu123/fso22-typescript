@@ -24,14 +24,14 @@ const parseHourArgs = (args: Array<string>): Array<number> => {
   }
 
   if (isNumbers) {
-    const hourValues = []
+    const hourValues = [];
     for (let i = 2; i < args.length; i++) {
       hourValues.push(Number(args[i]));
     }
     return hourValues;
   }
   throw new Error('Provided arguments were not numbers!');
-}
+};
 
 const isSuccessfulWeek = (totalHours: number): boolean => {
   if (totalHours >= 5) return true;
@@ -54,7 +54,7 @@ const calculateRating = (totalHours: number): RatingResult => {
       rating: 3,
       description: 'Wow! You\'re going above and beyond! Stay hard!'
     };
-  };
+  }
 };
 
 const calculateExercises = (dailyExerciseHours: Array<number>): ExerciseResult => {
@@ -79,11 +79,11 @@ const calculateExercises = (dailyExerciseHours: Array<number>): ExerciseResult =
 
 try {
   const exerciseHours = parseHourArgs(process.argv);
-  console.log(calculateExercises(exerciseHours))
+  console.log(calculateExercises(exerciseHours));
 } catch (error: unknown) {
-  let errorMessage = 'Something went wrong.'
+  let errorMessage = 'Something went wrong.';
   if (error instanceof Error) {
-    errorMessage += ` Error: ${error.message}.`
+    errorMessage += ` Error: ${error.message}.`;
   }
-  console.log(errorMessage)
+  console.log(errorMessage);
 }
