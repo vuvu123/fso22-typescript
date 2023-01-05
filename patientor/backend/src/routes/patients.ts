@@ -17,8 +17,11 @@ router.get('/:id', (req, res) => {
   }
 });
 
-router.post('/', (_req, res) => {
-  res.send('Adding a patient...');
+router.post('/', (req, res) => {
+  // const { name, dateOfBirth, ssn, gender, occupation } = req.body;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const patient = patientService.addPatient(req.body);
+  res.send(patient);
 });
 
 export default router;
